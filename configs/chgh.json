@@ -1,0 +1,16 @@
+[
+  {
+    "configname": "buntinjp",
+    "username": "buntinjp",
+    "gitconfigPath": "/Users/larchel/.gitconfig.buntinjp",
+    "secKeyPath": "/Users/larchel/.ssh/keys/github_buntinjp",
+    "pubKeyPath": "/Users/larchel/.ssh/keys/github_buntinjp.pub"
+  },
+  {
+    "configname": "liz",
+    "username": "buntin-liz",
+    "gitconfigPath": "/Users/larchel/.gitconfig.buntinliz",
+    "secKeyPath": "/Users/larchel/.ssh/keys/github_buntinliz",
+    "pubKeyPath": "/Users/larchel/.ssh/keys/github_buntinliz.pub"
+  }
+]

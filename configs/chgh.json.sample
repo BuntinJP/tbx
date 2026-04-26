@@ -1,0 +1,16 @@
+[
+  {
+    "configname": "main",
+    "username": "your-github-user",
+    "gitconfigPath": "/Users/your-name/.gitconfig-main",
+    "secKeyPath": "/Users/your-name/.ssh/github-main",
+    "pubKeyPath": "/Users/your-name/.ssh/github-main.pub"
+  },
+  {
+    "configname": "work",
+    "username": "your-work-github-user",
+    "gitconfigPath": "/Users/your-name/.gitconfig-work",
+    "secKeyPath": "/Users/your-name/.ssh/github-work",
+    "pubKeyPath": "/Users/your-name/.ssh/github-work.pub"
+  }
+]
