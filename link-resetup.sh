@@ -1,7 +1,7 @@
 #!/bin/sh
 # Reset all managed command links in ./bin.
 #
-# Add one link_ts line for each TypeScript command.
+# Add one link_command line for each user-facing command.
 # Comment out a line when you want to temporarily disable that command.
 
 set -eu
@@ -11,7 +11,7 @@ BIN_D="${SCRIPT_D}/bin"
 
 mkdir -p "${BIN_D}"
 
-link_ts() {
+link_command() {
 	command_name="$1"
 	script_rel="$2"
 	script_path="${SCRIPT_D}/${script_rel}"
@@ -35,4 +35,13 @@ link_ts() {
 	printf '[link-resetup.sh] linked: %s -> %s\n' "${link_path}" "${link_target}"
 }
 
-link_ts "chgh" "scripts/chgh.ts"
+link_command "b2a" "scripts/b2a.sh"
+link_command "chgh" "scripts/chgh.ts"
+link_command "prevent-sleep" "scripts/prevent-sleep.applescript"
+link_command "refresh-brew" "scripts/refresh-brew.zsh"
+link_command "request-macos-automation-permissions" "scripts/request-macos-automation-permissions.ts"
+link_command "s2a" "scripts/s2a.sh"
+link_command "show-gpg-key-ids" "scripts/show-gpg-key-ids.sh"
+link_command "ssh-socks-proxy" "scripts/ssh-socks-proxy.sh"
+link_command "t2a" "scripts/t2a.sh"
+link_command "trim-lines" "scripts/trim-lines.ts"

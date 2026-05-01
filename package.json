@@ -11,7 +11,9 @@
   "scripts": {
     "check": "tsc --noEmit",
     "link:resetup": "sh ./link-resetup.sh",
-    "chgh": "bun ./scripts/chgh.ts"
+    "chgh": "bun ./scripts/chgh.ts",
+    "request-macos-automation-permissions": "bun ./scripts/request-macos-automation-permissions.ts",
+    "trim-lines": "bun ./scripts/trim-lines.ts"
   },
   "devDependencies": {
     "@types/bun": "^1.3.13",

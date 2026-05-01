@@ -73,3 +73,28 @@ Done: Buntin-Liz/commands からシェルスクリプト移植完了。\n- tbx_r
 [2026-04-26T18:39:36+0900]  @codex
 
 Done: Bun/Node/TypeScript 6構成、scripts/chgh.ts、binリンク管理、tbx_rc.shを実装しBunで検証
+
+────────────────────────────────────────────────────────────
+[2026-04-26T19:07:58+0900]  @codex
+
+Starting: AGENTS.mdのリポジトリ目的説明とエージェント連携ルールを訂正・追記
+
+────────────────────────────────────────────────────────────
+[2026-04-26T19:08:30+0900]  @codex
+
+Done: AGENTS.mdを個人用シェルツールボックスとしての説明に訂正し、chat-memo.txtの定期確認と他エージェントへのタスク依頼明示ルールを追加
+
+────────────────────────────────────────────────────────────
+[2026-05-01T15:15:49+0900]  @codex
+
+Starting: Buntin-Liz/commandsから指定スクリプトを.tbx命名規則へ寄せて移植し、AppleScript許可初回フロー補助と行trimユーティリティを追加
+
+────────────────────────────────────────────────────────────
+[2026-05-01T15:17:00+0900]  @codex
+
+Progress: upstream指定ファイルを確認。これからscripts配下へkebab-case中心で移植し、binリンク管理とREADMEを更新
+
+────────────────────────────────────────────────────────────
+[2026-05-01T15:20:25+0900]  @codex
+
+Done: 指定スクリプト群をscripts/bin構成へ移植し、trim-linesとrequest-macos-automation-permissionsを追加。bun check/link再構築/構文チェック/AppleScript compile/trim-lines実行確認済み

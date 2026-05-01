@@ -12,8 +12,17 @@
 |---|---|
 | [`comment.sh`](#commentsh) | `chat-memo.txt` にタイムスタンプ付きのコメントを追記する |
 | [`tbx_rc.sh`](#tbx_rcsh) | `bin` の PATH と shell alias を読み込む run command |
-| [`link-resetup.sh`](#link-resetupsh) | `scripts/*.ts` から `bin/*` へのコマンドリンクを張り直す |
+| [`link-resetup.sh`](#link-resetupsh) | `scripts/*` から `bin/*` へのコマンドリンクを張り直す |
 | [`scripts/chgh.ts`](#scriptschghts) | GitHub SSH key / `.gitconfig` 切り替えコマンド |
+| [`scripts/trim-lines.ts`](#scriptstrim-linests) | stdin の各行を `trim()` して1行ずつ出力する |
+| [`scripts/request-macos-automation-permissions.ts`](#scriptsrequest-macos-automation-permissionsts) | macOS の Automation / Accessibility 初回許可プロンプトを先に出す |
+| `scripts/refresh-brew.zsh` | Homebrew の update / upgrade / cleanup / autoremove をまとめて実行する |
+| `scripts/ssh-socks-proxy.sh` | SSH SOCKS5 proxy を単一インスタンスで起動する |
+| `scripts/prevent-sleep.applescript` | `System Events` 経由で定期的に Space key を送る |
+| `scripts/b2a.sh` | クリップボード内の URL encode 文字列を decode して戻す |
+| `scripts/s2a.sh` | クリップボードの行を sort unique して戻す |
+| `scripts/t2a.sh` | クリップボードを plain text として `pbcopy` に通し直す |
+| `scripts/show-gpg-key-ids.sh` | GPG public key ID を一覧表示する |
 
 ---
 
@@ -90,7 +99,7 @@ Reviewing PR #42.
 
 ## `link-resetup.sh`
 
-`scripts/*.ts` を `bin/*` へ symlink する管理スクリプト。新しい TypeScript コマンドを追加するときは、`scripts/<name>.ts` を作ってから `link-resetup.sh` に `link_ts "<name>" "scripts/<name>.ts"` を追加する。
+`scripts/*` を `bin/*` へ symlink する管理スクリプト。新しいコマンドを追加するときは、`scripts/<name>.<ext>` を作ってから `link-resetup.sh` に `link_command "<name>" "scripts/<name>.<ext>"` を追加する。
 
 ```sh
 bun run link:resetup
@@ -100,7 +109,16 @@ bun run link:resetup
 
 | command | link |
 |---|---|
+| `b2a` | `bin/b2a -> ../scripts/b2a.sh` |
 | `chgh` | `bin/chgh -> ../scripts/chgh.ts` |
+| `prevent-sleep` | `bin/prevent-sleep -> ../scripts/prevent-sleep.applescript` |
+| `refresh-brew` | `bin/refresh-brew -> ../scripts/refresh-brew.zsh` |
+| `request-macos-automation-permissions` | `bin/request-macos-automation-permissions -> ../scripts/request-macos-automation-permissions.ts` |
+| `s2a` | `bin/s2a -> ../scripts/s2a.sh` |
+| `show-gpg-key-ids` | `bin/show-gpg-key-ids -> ../scripts/show-gpg-key-ids.sh` |
+| `ssh-socks-proxy` | `bin/ssh-socks-proxy -> ../scripts/ssh-socks-proxy.sh` |
+| `t2a` | `bin/t2a -> ../scripts/t2a.sh` |
+| `trim-lines` | `bin/trim-lines -> ../scripts/trim-lines.ts` |
 
 ---
 
@@ -126,16 +144,43 @@ chgh --dry-run
 
 ---
 
+## `scripts/trim-lines.ts`
+
+stdin の複数行文字列を読み、各行を `trim()` して newline-separated な出力に戻す。
+
+```sh
+printf ' foo  \n bar  \n' | trim-lines
+printf ' foo  \n\n bar  \n' | trim-lines --drop-empty
+printf ' foo  \n bar  \n' | trim-lines --json
+```
+
+---
+
+## `scripts/request-macos-automation-permissions.ts`
+
+新しいターミナルアプリや workflow 実行環境から `osascript` を使う前に、macOS の初回許可プロンプトをまとめて出すための補助コマンド。
+
+```sh
+request-macos-automation-permissions
+request-macos-automation-permissions --include-key-event
+```
+
+macOS の権限はスクリプトから無断付与できないため、このコマンドは `Finder` / `System Events` / `Terminal` / `Shortcuts Events` への無害な AppleScript probe を実行し、必要な許可ダイアログを先に表示する。
+
+---
+
 ## ファイル構成
 
 ```
 ~/.tbx/
-├── bin/                     # scripts/*.ts への symlink 置き場
-│   └── chgh -> ../scripts/chgh.ts
+├── bin/                     # scripts/* への symlink 置き場
+│   ├── chgh -> ../scripts/chgh.ts
+│   └── ...
 ├── configs/
 │   └── chgh.json.sample     # chgh 設定例
 ├── scripts/
-│   └── chgh.ts              # Bun TypeScript コマンド
+│   ├── chgh.ts              # Bun TypeScript コマンド
+│   └── ...
 ├── comment.sh               # コメント投稿スクリプト
 ├── link-resetup.sh          # bin リンク再構築
 ├── tbx_rc.sh                # PATH / alias 読み込み
